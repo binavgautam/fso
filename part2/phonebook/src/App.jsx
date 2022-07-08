@@ -37,7 +37,8 @@ const App = () => {
     const person = persons.find(
       (p) => p.name.trim().toLowerCase() === newName.trim().toLowerCase()
     );
-    person ? updateNumber(person.id, newPerson) : createPerson(newPerson);
+    //person ? updateNumber(person.id, newPerson) : 
+    createPerson(newPerson);
     setNewName("");
     setNewNumber("");
   };
