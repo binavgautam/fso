@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Input from "./Input";
 import Persons from "./Persons";
 import Search from "./Search";
-import { personsService } from "./services/persons";
+import { personsService } from "./services/personService";
 import "./App.css";
 import Notification from "./Notification";
 
@@ -37,17 +37,21 @@ const App = () => {
     const person = persons.find(
       (p) => p.name.trim().toLowerCase() === newName.trim().toLowerCase()
     );
-    //person ? updateNumber(person.id, newPerson) : 
-    createPerson(newPerson);
+    person ? updateNumber(person.id, newPerson) : createPerson(newPerson);
     setNewName("");
     setNewNumber("");
   };
 
   const createPerson = async (newPerson) => {
-    await personsService.create(newPerson).then((returnedPerson) => {
-      setPersons(persons.concat(returnedPerson));
-    });
-    notification(`${newPerson.name} created succesfully`, "success");
+    try {
+      await personsService.create(newPerson).then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        notification(`${newPerson.name} created succesfully`, "success");
+      });
+    } catch (error) {
+      console.log(error.response.data.error);
+      notification(error.response.data.error, "error");
+    }
   };
 
   const updateNumber = async (id, person) => {
@@ -63,9 +67,9 @@ const App = () => {
           persons.map((p) => (p.id === updatedPerson.id ? updatedPerson : p))
         );
         notification(`${person.name} updated succesfully`, "success");
-      } catch {
-        notification(`${person.name} does not exist. Please refresh`, "error");
-        setPersons(persons.filter((p) => p.id !== id));
+      } catch (error) {
+        console.log(error.response.data.error);
+        notification(error.response.data.error, "error");
       }
     }
   };
