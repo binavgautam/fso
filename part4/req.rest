@@ -1,0 +1,23 @@
+GET http://localhost:3001/api/blogs
+###
+GET http://localhost:3001/api/blogs/62cf21959959be4721de9df4
+###
+POST http://localhost:3001/api/blogs 
+Content-Type: application/json
+
+{
+    "title":"LinLin",
+    "author":"Lin",
+    "url":"lin",
+    "likes":2
+}
+###
+PUT http://localhost:3001/api/blogs/62cf21959959be4721de9df4
+Content-Type: application/json
+
+{
+    "title":"OLinLin",
+    "author":"Lin",
+    "url":"lin",
+    "likes":2
+}
