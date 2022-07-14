@@ -3,9 +3,9 @@ Content-Type: application/json
 
 {
     "username":"lin",
-    "password":"lin"
+    "password":"hiii"
 }
 ###
 GET http://localhost:3001/api/users
 ###
-DELETE http://localhost:3001/api/users/62cf31d999b7b5282318c536
+DELETE http://localhost:3001/api/users/62d05aabfe1dd498878d30bd
