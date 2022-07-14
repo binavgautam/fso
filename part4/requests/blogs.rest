@@ -6,10 +6,11 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-    "title":"LinLin",
-    "author":"Lin",
-    "url":"lin",
-    "likes":2
+    "title":"aaaa",
+    "author":"aaaa",
+    "url":"aaaa",
+    "likes":2,
+    "userId":"62cfd775bc0b7cc1fd3df1c7"
 }
 ###
 PUT http://localhost:3001/api/blogs/62cf21959959be4721de9df4
@@ -21,3 +22,5 @@ Content-Type: application/json
     "url":"lin",
     "likes":2
 }
+###
+DELETE http://localhost:3001/api/blogs/62cfdefa8cce3a5d1696015d

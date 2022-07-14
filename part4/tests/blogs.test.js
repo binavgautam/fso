@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const supertest = require("supertest");
 const app = require("../app");
 const Blogs = require("../models/blogs");
-const helper = require("./blog_helper");
+const helper = require("./test_helper");
+
 const api = supertest(app);
 
 const blogs = helper.testBlogs;
@@ -84,6 +85,7 @@ describe("addingBlogs", () => {
       title: "BlogXD",
       author: "BenXD",
       url: "benblogXD",
+      userId: "5a3d5da59070081a82a344",
       likes: 6,
     };
 
