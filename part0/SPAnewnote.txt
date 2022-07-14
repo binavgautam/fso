@@ -1,0 +1,13 @@
+title spa new note
+
+note over browser:
+JSON-data  sent as POST request 
+{
+  content: "single page app does not reload the whole page",
+  date: "2019-05-25T15:15:59.905Z"
+}
+end note
+browser->server:  HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: 201 created
+
+https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgc3BhIG5ldyBub3RlCgpub3RlIG92ZXIgYnJvd3NlcjoKSlNPTi1kYXRhICBzZW50IGFzIFBPU1QgcmVxdWVzdCAKewogIGNvbnRlbnQ6ICJzaW5nbGUgcGFnZSBhcHAgZG9lcyBub3QgcmVsb2FkIHRoZSB3aG8AHAciLAogIGRhdGU6ICIyMDE5LTA1LTI1VDE1OjE1OjU5LjkwNVoiCn0KZW5kAIEcBgCBEActPnNlcnZlcjogIEhUVFAAgQwGaHR0cHM6Ly9zdHVkaWVzLmNzLmhlbHNpbmtpLmZpL2V4YW1wbGVhcHAvbmV3X25vdGVfc3BhCgBEBi0tPgCBawggMjAxIGNyZWF0ZWQKCg&s=default
