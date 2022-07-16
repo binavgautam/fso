@@ -22,6 +22,8 @@ const App = () => {
     }
   }, []);
 
+  const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
+
   const notification = (message, type) => {
     setNotif({ message, type });
     setTimeout(() => {
@@ -58,14 +60,36 @@ const App = () => {
     }
   };
 
-  const likeBlog = async () => {
+  const likeBlog = async (blog, id) => {
     try {
-    } catch {}
+      const updatedBlog = await blogService.updateBlog(id, blog);
+
+      setBlogs(
+        blogs.map((blog) => (blog.id === updatedBlog.id ? updatedBlog : blog))
+      );
+      notification(`Blog Liked`, "success");
+    } catch (error) {
+      console.log(error.response.data.error);
+      notification(error.response.data.error, "error");
+    }
   };
 
-  const deleteBlog = () => {
+  const deleteBlog = async (blogDelete, id) => {
+    if (blogDelete.user.username !== user.username) {
+      notification(`Sorry, You cannot delete this blog!`, "error");
+      return;
+    }
     try {
-    } catch {}
+      console.log(id);
+      await blogService.deleteBlog(id);
+      setBlogs(blogs.filter((p) => p !== blogDelete));
+      notification(`${blogDelete.title} deleted successfully`, "success");
+    } catch {
+      notification(
+        `${blogDelete.name} does not exist. Please refresh`,
+        "error"
+      );
+    }
   };
 
   return (
@@ -77,7 +101,7 @@ const App = () => {
         handleLogin={handleLogin}
         createBlog={createBlog}
         setUser={setUser}
-        blogs={blogs}
+        blogs={sortedBlogs}
         likeBlog={likeBlog}
         deleteBlog={deleteBlog}
       />

@@ -4,7 +4,6 @@ export default function BlogsForm({ createBlog, toggleBlogForm }) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
-  ///const [likes, setLikes] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,7 +11,6 @@ export default function BlogsForm({ createBlog, toggleBlogForm }) {
       title: title,
       author: author,
       url: url,
-      //likes: likes,
     };
     const result = await createBlog(newBLog);
     if (result) {
@@ -20,7 +18,6 @@ export default function BlogsForm({ createBlog, toggleBlogForm }) {
       setAuthor("");
       setUrl("");
       toggleBlogForm();
-      //setLikes(0);
     }
   };
 
@@ -60,16 +57,6 @@ export default function BlogsForm({ createBlog, toggleBlogForm }) {
             }}
           />
         </div>
-        {/* <div>
-          Likes
-          <button type="button" onClick={() => setLikes(likes - 1)}>
-            -
-          </button>
-          {likes}
-          <button type="button" onClick={() => setLikes(likes + 1)}>
-            +
-          </button>
-        </div> */}
         <button type="submit">Add blog</button>
       </form>
     </div>
