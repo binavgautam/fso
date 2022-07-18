@@ -17,8 +17,6 @@ const BlogLoggedIn = ({ blog, likeBlog, deleteBlog }) => {
 
   const toDelete = (blog) => {
     const blogId = blog.id;
-    console.log(blogId);
-    console.log(blog);
     if (window.confirm(`Do you want to delete ${blog.title} ?`)) {
       deleteBlog(blog, blogId);
     }
@@ -30,22 +28,20 @@ const BlogLoggedIn = ({ blog, likeBlog, deleteBlog }) => {
       ...blog,
       likes: blog.likes + 1,
     };
-    console.log(blog.likes);
-    console.log(updatedBlog.likes);
     likeBlog(updatedBlog, blogId);
   };
 
   return (
     <div style={blogStyle}>
       {!showBlog ? (
-        <>
+        <div className="togglableContent">
           <p>
             {blog.title}
-            <button type="button" onClick={toggleBlog}>
+            <button id="view" type="button" onClick={toggleBlog}>
               view
             </button>
           </p>
-        </>
+        </div>
       ) : (
         <>
           <p>
@@ -57,12 +53,12 @@ const BlogLoggedIn = ({ blog, likeBlog, deleteBlog }) => {
           <p>Url: {blog.url}</p>
           <p>
             Likes: {blog.likes}
-            <button type="button" onClick={() => toUpdate(blog)}>
+            <button id="like" type="button" onClick={() => toUpdate(blog)}>
               like
             </button>
           </p>
           <p>-by {blog.author}</p>
-          <button type="button" onClick={() => toDelete(blog)}>
+          <button id="delete" type="button" onClick={() => toDelete(blog)}>
             delete
           </button>
         </>

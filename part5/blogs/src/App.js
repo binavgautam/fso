@@ -67,7 +67,7 @@ const App = () => {
       setBlogs(
         blogs.map((blog) => (blog.id === updatedBlog.id ? updatedBlog : blog))
       );
-      notification(`Blog Liked`, "success");
+      notification("Blog Liked", "success");
     } catch (error) {
       console.log(error.response.data.error);
       notification(error.response.data.error, "error");
@@ -76,7 +76,7 @@ const App = () => {
 
   const deleteBlog = async (blogDelete, id) => {
     if (blogDelete.user.username !== user.username) {
-      notification(`Sorry, You cannot delete this blog!`, "error");
+      notification("Sorry, You cannot delete this blog!", "error");
       return;
     }
     try {
@@ -84,7 +84,7 @@ const App = () => {
       await blogService.deleteBlog(id);
       setBlogs(blogs.filter((p) => p !== blogDelete));
       notification(`${blogDelete.title} deleted successfully`, "success");
-    } catch {
+    } catch (error) {
       notification(
         `${blogDelete.name} does not exist. Please refresh`,
         "error"

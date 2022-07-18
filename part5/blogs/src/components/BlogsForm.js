@@ -29,7 +29,7 @@ export default function BlogsForm({ createBlog, toggleBlogForm }) {
           <input
             type="text"
             value={title}
-            name="Title"
+            id="title"
             onChange={({ target }) => {
               setTitle(target.value);
             }}
@@ -40,7 +40,7 @@ export default function BlogsForm({ createBlog, toggleBlogForm }) {
           <input
             type="text"
             value={author}
-            name="Author"
+            id="author"
             onChange={({ target }) => {
               setAuthor(target.value);
             }}
@@ -51,13 +51,15 @@ export default function BlogsForm({ createBlog, toggleBlogForm }) {
           <input
             type="text"
             value={url}
-            name="Url"
+            id="url"
             onChange={({ target }) => {
               setUrl(target.value);
             }}
           />
         </div>
-        <button type="submit">Add blog</button>
+        <button id="addBlog" type="submit">
+          Add blog
+        </button>
       </form>
     </div>
   );

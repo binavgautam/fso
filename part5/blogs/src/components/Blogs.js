@@ -32,7 +32,7 @@ export default function Blogs({
           {!showLogin ? (
             <>
               <p>Login to add/view Blogs</p>
-              <button type="button" onClick={toggleLogin}>
+              <button id="loginFormButton" type="button" onClick={toggleLogin}>
                 Login
               </button>
               {blogs.map((blog) => (
@@ -74,8 +74,8 @@ export default function Blogs({
             </>
           ) : (
             <>
-              <button type="button" onClick={toggleBlogForm}>
-                Add New Note
+              <button id="newBlog" type="button" onClick={toggleBlogForm}>
+                Add New Blog
               </button>
             </>
           )}
