@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import { setNotification } from "../reducers/notificationReducer";
 import { createAnecdote } from "../reducers/anecdoteReducer";
@@ -13,10 +12,10 @@ export default function AnecdotesForm() {
     }, 1000);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const anecdote = e.target.anecdotes.value;
-    e.target.anecdotes.value = "";
+    const anecdote = e.target.anecdote.value;
+    e.target.anecdote.value = "";
     console.log(anecdote);
     dispatch(createAnecdote(anecdote));
     notification(`New blog added "${anecdote}"`);
@@ -27,7 +26,7 @@ export default function AnecdotesForm() {
       <h2>create new</h2>
       <form onSubmit={onSubmit}>
         <div>
-          <input name="anecdotes" />
+          <input name="anecdote" />
         </div>
         <button>create</button>
       </form>

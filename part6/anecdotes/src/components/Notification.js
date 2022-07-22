@@ -6,7 +6,6 @@ const Notification = () => {
     borderWidth: 1,
   };
   const notification = useSelector((state) => state.notification);
-  console.log(notification);
   return <>{notification && <div style={style}>{notification}</div>}</>;
 };
 
