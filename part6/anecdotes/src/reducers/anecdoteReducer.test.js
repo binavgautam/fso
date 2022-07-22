@@ -5,19 +5,15 @@ describe("anecdoteReducer", () => {
   test("NEW_ANECDOTE", () => {
     const state = [];
     const action = {
-      type: "NEW_ANECDOTE",
-      data: {
-        anecdote: "anecdote",
-        votes: 0,
-        id: 1,
-      },
+      type: "anecdotes/createAnecdote",
+      payload: "anecdote",
     };
 
     deepFreeze(state);
     const newState = anecdoteReducer(state, action);
 
     expect(newState).toHaveLength(1);
-    expect(newState).toContainEqual(action.data);
+    expect(newState.map((s) => s.anecdote)).toContainEqual(action.payload);
   });
 
   test("VOTE", () => {
@@ -35,10 +31,8 @@ describe("anecdoteReducer", () => {
     ];
 
     const action = {
-      type: "VOTE",
-      data: {
-        id: 2,
-      },
+      type: "anecdotes/vote",
+      payload: 2,
     };
 
     deepFreeze(state);
