@@ -1,49 +1,45 @@
-import { useState } from "react";
+import { useField } from "../hooks/useField";
 
 const NewForm = ({ addNew }) => {
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
-  const [info, setInfo] = useState("");
+  const content = useField("");
+  const author = useField("");
+  const info = useField("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addNew({
-      content,
-      author,
-      info,
+      content: content.value,
+      author: author.value,
+      info: info.value,
       votes: 0,
     });
   };
 
+  const reset = () => {
+    content.reset();
+    author.reset();
+    info.reset();
+  };
   return (
     <div>
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
+          <input {...content.fields} />
         </div>
         <div>
           author
-          <input
-            name="author"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
+          <input {...author.fields} />
         </div>
         <div>
           url for more info
-          <input
-            name="info"
-            value={info}
-            onChange={(e) => setInfo(e.target.value)}
-          />
+          <input {...info.fields} />
         </div>
         <button>create</button>
+        <button type="button" onClick={reset}>
+          reset
+        </button>
       </form>
     </div>
   );
