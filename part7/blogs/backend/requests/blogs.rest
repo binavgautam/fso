@@ -1,0 +1,27 @@
+GET http://localhost:3001/api/blogs
+###
+GET http://localhost:3001/api/blogs/62cf21959959be4721de9df4
+###
+POST http://localhost:3001/api/blogs 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxpbiIsImlkIjoiNjJkMDQwMjlkOGIwZjA3NGU4OWMxZTU3IiwiaWF0IjoxNjU3ODI1MTQxLCJleHAiOjE2NTc4Mjg3NDF9.e_wcQ1BmU8N_5dER-SX4PmxMJVWlenwye_C8kjL__eQ
+
+{
+    "title":"bbbb",
+    "author":"bbbbb",
+    "url":"bbbbb",
+    "likes":3,
+    "userId":"62d04029d8b0f074e89c1e57"
+}
+###
+PUT http://localhost:3001/api/blogs/62cf21959959be4721de9df4
+Content-Type: application/json
+
+{
+    "title":"OLinLin",
+    "author":"Lin",
+    "url":"lin",
+    "likes":2
+}
+###
+DELETE http://localhost:3001/api/blogs/62cfe07169fd10781d54af4b

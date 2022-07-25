@@ -1,0 +1,11 @@
+Post http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+    "username":"bin",
+    "password":"bin"
+}
+###
+GET http://localhost:3001/api/users
+###
+DELETE http://localhost:3001/api/users/62d05aabfe1dd498878d30bd
