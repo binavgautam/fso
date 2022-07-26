@@ -6,11 +6,13 @@ import BlogsForm from "./BlogsForm";
 import LoginForm from "./LoginForm";
 import Logout from "./Logout";
 
-export default function Blogs({ createBlog, blogs, likeBlog, deleteBlog }) {
+export default function Blogs({ likeBlog, deleteBlog }) {
   const [showLogin, setShowLogin] = useState(false);
   const [showBlogForm, setShowBlogForm] = useState(true);
 
   const user = useSelector(({ user }) => user);
+  const bblogs = useSelector(({ blogs }) => blogs);
+  const blogs = bblogs.slice().sort((a, b) => b.likes - a.likes);
 
   const toggleLogin = () => {
     setShowLogin(!showLogin);
@@ -30,9 +32,7 @@ export default function Blogs({ createBlog, blogs, likeBlog, deleteBlog }) {
               <button id="loginFormButton" type="button" onClick={toggleLogin}>
                 Login
               </button>
-              {blogs.map((blog) => (
-                <BlogLoggedOut key={blog.id} blog={blog} />
-              ))}
+              <BlogLoggedOut />
             </>
           ) : (
             <>
@@ -59,10 +59,7 @@ export default function Blogs({ createBlog, blogs, likeBlog, deleteBlog }) {
           ))}
           {!showBlogForm ? (
             <>
-              <BlogsForm
-                createBlog={createBlog}
-                toggleBlogForm={toggleBlogForm}
-              />
+              <BlogsForm toggleBlogForm={toggleBlogForm} />
               <button type="button" onClick={toggleBlogForm}>
                 Cancel
               </button>

@@ -19,10 +19,6 @@ export default function LoginForm() {
     // const res =
     dispatch(login(newUser));
     dispatch(setNotification("Successfully logged in"));
-    // if (res) {
-    //   username.reset();
-    //   password.reset();
-    // }
   };
   return (
     <div>

@@ -20,7 +20,7 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { setUser, removeUser, isUser } = userSlice.actions;
+export const { getUsers, setUser, removeUser, isUser } = userSlice.actions;
 
 export const login = (newUser) => {
   console.log("g");
