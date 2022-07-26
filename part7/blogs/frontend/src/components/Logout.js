@@ -1,8 +1,12 @@
-export default function Logout({ setUser, toggleLogin }) {
+import { useDispatch } from "react-redux";
+import { setNotification } from "../reducers/notificationReducer";
+import { logout } from "../reducers/userReducer";
+
+export default function Logout() {
+  const dispatch = useDispatch();
   const handleCLick = () => {
-    window.localStorage.removeItem("loggedInUser");
-    setUser(null);
-    toggleLogin();
+    dispatch(logout());
+    dispatch(setNotification("Logged Out"));
   };
   return (
     <div>

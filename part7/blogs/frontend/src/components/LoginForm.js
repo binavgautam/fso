@@ -1,42 +1,39 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
+// import { useState } from "react";
+import { login } from "../reducers/userReducer";
+import { useDispatch } from "react-redux";
+import { useField } from "../hooks/useField";
+import { setNotification } from "../reducers/notificationReducer";
 
-export default function LoginForm({ handleLogin }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export default function LoginForm() {
+  const username = useField("");
+  const password = useField("");
 
-  const handleSubmit = async (e) => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const newUser = {
-      username: username,
-      password: password,
+      username: username.value,
+      password: password.value,
     };
-    const res = await handleLogin(newUser);
-    if (res) {
-      setUsername("");
-      setPassword("");
-    }
+    // const res =
+    dispatch(login(newUser));
+    dispatch(setNotification("Successfully logged in"));
+    // if (res) {
+    //   username.reset();
+    //   password.reset();
+    // }
   };
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div>
           Username
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={({ target }) => setUsername(target.value)}
-          />
+          <input {...username.fields} />
         </div>
         <div>
           Password
-          <input
-            type="text"
-            id="password"
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-          />
+          <input {...password.fields} />
         </div>
         <button id="loginButton" type="submit">
           Login
@@ -45,7 +42,3 @@ export default function LoginForm({ handleLogin }) {
     </div>
   );
 }
-
-LoginForm.propTypes = {
-  handleLogin: PropTypes.func.isRequired,
-};
