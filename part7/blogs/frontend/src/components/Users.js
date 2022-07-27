@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react";
-import { Link, Route, Routes, useMatch } from "react-router-dom";
-import userService from "../services/userService";
-import User from "./User";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Users() {
-  const [users, setUsers] = useState([]);
+  const users = useSelector(({ users }) => users);
 
-  useEffect(() => {
-    userService.getAll().then((res) => setUsers(res));
-  }, []);
-
-  const match = useMatch("/user/:id");
-  const user = match
-    ? user.find((a) => a.id === Number(match.params.id))
-    : null;
-
+  console.log(users);
   return (
     <div>
       <h2>Users</h2>
@@ -25,20 +15,15 @@ export default function Users() {
             <th>blogs</th>
           </tr>
           {users.map((user) => (
-            <div key={user.id}>
-              <Link to={`/users/${user.id}`}>
-                <tr>
-                  <td>{user.username}</td>
-                  <td>{user.blogs.length}</td>
-                </tr>
-              </Link>
-            </div>
+            <tr key={user.id}>
+              <td>
+                <Link to={`/users/${user.id}`}>{user.username}</Link>
+              </td>
+              <td>{user.blogs.length}</td>
+            </tr>
           ))}
         </tbody>
       </table>
-      <Routes>
-        <Route path="/users/:id" element={<User />} />
-      </Routes>
     </div>
   );
 }

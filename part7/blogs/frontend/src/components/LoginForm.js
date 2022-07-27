@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { login } from "../reducers/userReducer";
+import { login } from "../reducers/loginReducer";
 import { useDispatch } from "react-redux";
 import { useField } from "../hooks/useField";
 import { setNotification } from "../reducers/notificationReducer";

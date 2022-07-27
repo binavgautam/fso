@@ -45,7 +45,6 @@ export default function Blogs({ likeBlog, deleteBlog }) {
         </>
       ) : (
         <>
-          {console.log("here")}
           <h2>
             Hello {user.username}! <Logout />
           </h2>

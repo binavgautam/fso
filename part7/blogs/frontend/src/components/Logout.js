@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { setNotification } from "../reducers/notificationReducer";
-import { logout } from "../reducers/userReducer";
+import { logout } from "../reducers/loginReducer";
 
 export default function Logout() {
   const dispatch = useDispatch();
