@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { likeBlogAction, removeBlogAction } from "../reducers/blogsReducer";
 import { setNotification } from "../reducers/notificationReducer";
+import CommentForm from "./CommentForm";
 
 export default function Blog({ blog }) {
   const dispatch = useDispatch();
+  const [flag, setFlag] = useState(false);
 
   const user = useSelector(({ user }) => user);
 
@@ -51,6 +54,10 @@ export default function Blog({ blog }) {
       </p>
       <p>-by {blog.author}</p>
       <h3>comments:</h3>
+      {blog.comments.map((c) => (
+        <li key={c}>{c}</li>
+      ))}
+      <CommentForm id={blog.id} flag={flag} setFlag={setFlag} />
       <button
         id="delete"
         type="button"

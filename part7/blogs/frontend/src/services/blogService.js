@@ -22,6 +22,14 @@ const createBlog = async (newBlog) => {
   return response.data;
 };
 
+const createComment = async (id, newComment) => {
+  console.log("service");
+  console.log(id);
+  console.log(newComment);
+  const response = await axios.post(`${baseUrl}/${id}/comments`, newComment);
+  return response.data;
+};
+
 const updateBlog = async (id, newObject) => {
   const config = {
     headers: {
@@ -42,5 +50,12 @@ const deleteBlog = async (id) => {
   return request.data;
 };
 
-const blogService = { getAll, tokenSetter, createBlog, updateBlog, deleteBlog };
+const blogService = {
+  getAll,
+  tokenSetter,
+  createBlog,
+  updateBlog,
+  deleteBlog,
+  createComment,
+};
 export default blogService;

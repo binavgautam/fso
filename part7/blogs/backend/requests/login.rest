@@ -2,8 +2,7 @@ POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-    "username": "lin",
-    "password": "lin"
+    "username": "bin",
+    "password": "bin"
 }
 ###
-GET http://localhost:3001/api/login

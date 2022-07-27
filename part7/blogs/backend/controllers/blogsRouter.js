@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const { request } = require("express");
 
 const getTokenFrom = (request) => {
-  const authorization = request.get("authorization");
+  const authorization = request.get("Authorization");
   if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
     return authorization.substring(7);
   }
@@ -24,7 +24,7 @@ blogsRouter.get("/:id", async (request, response, next) => {
 
 blogsRouter.get("/:id/comments", async (request, response) => {
   const blog = await Blogs.findById(request.params.id);
-  rblog ? response.json(blog.comments) : response.status(404).end();
+  blog ? response.json(blog.comments) : response.status(404).end();
 });
 
 blogsRouter.post("/", async (request, response) => {
@@ -51,28 +51,27 @@ blogsRouter.post("/", async (request, response) => {
   response.status(201).json(savedBlog);
 });
 
-blogsRouter.post("/:id/comments", async (req, res) => {
+blogsRouter.post("/:id/comments", async (request, response) => {
   const body = request.body;
-  const token = getTokenFrom(request);
-  const decodedToken = jwt.verify(token, process.env.SECRET);
-  if (!decodedToken.id) {
-    return response.status(401).json({ error: "token missing or invalid" });
-  }
-
-  const blog = await Blogs.findById(decodedToken.id);
+  console.log("router");
+  console.log(body.comment);
+  const blog = await Blogs.findById(request.params.id);
   const updatedBlog = {
     ...blog,
-    comments: blog.comments.concat(body.comment),
+    comments: blog.comments.push(body.comment),
   };
-  const savedBlog = await Blogs.findByIdAndUpdate(
-    request.params.id,
-    updatedBlog
-  );
-  response.status(201).json(savedBlog);
+  await Blogs.findByIdAndUpdate(request.params.id, updatedBlog);
+  response.status(201).end();
 });
 
 blogsRouter.delete("/:id", async (request, response) => {
   await Blogs.findByIdAndRemove(request.params.id);
+  response.status(204).end();
+});
+
+blogsRouter.delete("/:id/comments", async (request, response) => {
+  const blog = await Blogs.findById(request.params.id);
+  blog = { ...blog, comments: [] };
   response.status(204).end();
 });
 

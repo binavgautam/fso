@@ -1,18 +1,15 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import BlogLoggedIn from "./BlogLoggedIn";
-import BlogLoggedOut from "./BlogLoggedOut";
+import BlogList from "./BlogList";
 import BlogsForm from "./BlogsForm";
 import LoginForm from "./LoginForm";
 import Logout from "./Logout";
 
-export default function Blogs({ likeBlog, deleteBlog }) {
+export default function Blogs() {
   const [showLogin, setShowLogin] = useState(false);
   const [showBlogForm, setShowBlogForm] = useState(true);
 
   const user = useSelector(({ user }) => user);
-  const bblogs = useSelector(({ blogs }) => blogs);
-  const blogs = bblogs.slice().sort((a, b) => b.likes - a.likes);
 
   const toggleLogin = () => {
     setShowLogin(!showLogin);
@@ -32,7 +29,7 @@ export default function Blogs({ likeBlog, deleteBlog }) {
               <button id="loginFormButton" type="button" onClick={toggleLogin}>
                 Login
               </button>
-              <BlogLoggedOut />
+              <BlogList />
             </>
           ) : (
             <>
@@ -48,14 +45,7 @@ export default function Blogs({ likeBlog, deleteBlog }) {
           <h2>
             Hello {user.username}! <Logout />
           </h2>
-          {blogs.map((blog) => (
-            <BlogLoggedIn
-              key={blog.id}
-              blog={blog}
-              likeBlog={likeBlog}
-              deleteBlog={deleteBlog}
-            />
-          ))}
+          <BlogList />
           {!showBlogForm ? (
             <>
               <BlogsForm toggleBlogForm={toggleBlogForm} />
