@@ -24,8 +24,10 @@ export default function Blog({ blog }) {
       return;
     }
     try {
-      dispatch(removeBlogAction(id));
-      dispatch(setNotification(`${blogDelete.title} deleted successfully`));
+      if (window.confirm("Do you want to confirm delete?")) {
+        dispatch(removeBlogAction(id));
+        dispatch(setNotification(`${blogDelete.title} deleted successfully`));
+      }
     } catch (error) {
       dispatch(
         setNotification(
