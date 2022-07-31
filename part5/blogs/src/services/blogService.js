@@ -28,6 +28,7 @@ const updateBlog = async (id, newObject) => {
       Authorization: token,
     },
   };
+  console.log(newObject);
   const request = await axios.put(`${baseUrl}/${id}`, newObject, config);
   return request.data;
 };

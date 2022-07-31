@@ -16,15 +16,28 @@ export default function Comments({ blogComments, id }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!commentForm.value) {
+      return null;
+    }
     const newComment = { comment: commentForm.value };
     await blogService.createComment(id, newComment);
     setComments(comments.concat(commentForm.value));
     commentForm.reset();
   };
 
+  const onClick = async () => {
+    await blogService.clearComments(id);
+    setComments([]);
+  };
+
   return (
     <div>
-      <h3>comments:</h3>
+      <h3>
+        comments:{" "}
+        <button type="button" onClick={onClick}>
+          clear
+        </button>
+      </h3>
       {comments.map((c) => (
         <li key={c}>{c}</li>
       ))}

@@ -40,10 +40,16 @@ export const createBlogAction = (newBlog) => {
 };
 
 export const likeBlogAction = (id, blog) => {
-  const updated = { ...blog, likes: blog.likes + 1 };
   return async (dispatch) => {
+    const updated = {
+      ...blog,
+      likes: blog.likes + 1,
+    };
     const response = await blogService.updateBlog(id, updated);
+    console.log(response);
+    console.log(typeof response);
     dispatch(like(response));
+    return response;
   };
 };
 

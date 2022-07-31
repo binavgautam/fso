@@ -33,7 +33,9 @@ const updateBlog = async (id, newObject) => {
       Authorization: token,
     },
   };
+  console.log(newObject);
   const request = await axios.put(`${baseUrl}/${id}`, newObject, config);
+  console.log(request.data);
   return request.data;
 };
 
@@ -47,6 +49,13 @@ const deleteBlog = async (id) => {
   return request.data;
 };
 
+const clearComments = async (id) => {
+  console.log("service", id);
+  const request = await axios.put(`${baseUrl}/${id}/comments`);
+  console.log("cleared");
+  return request.data;
+};
+
 const blogService = {
   getAll,
   tokenSetter,
@@ -54,5 +63,6 @@ const blogService = {
   updateBlog,
   deleteBlog,
   createComment,
+  clearComments,
 };
 export default blogService;

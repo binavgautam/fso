@@ -2,7 +2,6 @@ const blogsRouter = require("express").Router();
 const Blogs = require("../models/blogs");
 const Users = require("../models/users");
 const jwt = require("jsonwebtoken");
-const { request } = require("express");
 
 const getTokenFrom = (request) => {
   const authorization = request.get("Authorization");
@@ -41,7 +40,8 @@ blogsRouter.post("/", async (request, response) => {
     title: body.title,
     author: body.author,
     url: body.url,
-    likes: body.likes || 0,
+    likes: 0,
+    comments: [],
     user: user._id,
   });
 
@@ -69,12 +69,6 @@ blogsRouter.delete("/:id", async (request, response) => {
   response.status(204).end();
 });
 
-blogsRouter.delete("/:id/comments", async (request, response) => {
-  const blog = await Blogs.findById(request.params.id);
-  blog = { ...blog, comments: [] };
-  response.status(204).end();
-});
-
 blogsRouter.put("/:id", async (request, response) => {
   const body = request.body;
   const token = getTokenFrom(request);
@@ -82,18 +76,38 @@ blogsRouter.put("/:id", async (request, response) => {
   if (!decodedToken.id) {
     return response.status(401).json({ error: "token missing or invalid" });
   }
+  const blog = Blogs.findById(request.params.id);
+  const newBlog = {
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes,
+    comments: body.comments,
+  };
+  const updatedBlog = await Blogs.findByIdAndUpdate(
+    request.params.id,
+    newBlog,
+    { new: true }
+  );
+  response.json(updatedBlog);
+});
+
+blogsRouter.put("/:id/comments", async (request, response) => {
+  const body = request.body;
 
   const newBlog = {
     title: body.title,
     author: body.author,
     url: body.url,
     likes: body.likes,
+    comments: [],
   };
-
-  const blog = await Blogs.findByIdAndUpdate(request.params.id, newBlog, {
-    new: true,
-  });
-  response.json(blog);
+  const updatedBlog = await Blogs.findByIdAndUpdate(
+    request.params.id,
+    newBlog,
+    { new: true }
+  );
+  response.json(updatedBlog);
 });
 
 module.exports = blogsRouter;

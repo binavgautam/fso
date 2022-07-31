@@ -62,11 +62,11 @@ describe("Blog App", function () {
       });
 
       it.only("Like", function () {
-        cy.contains("jest test").contains("view").click();
+        cy.contains("jest test").click();
         cy.get("#like").click();
         cy.contains("1");
-        cy.contains("jest test").contains("hide").click();
-        cy.contains("jest test").contains("view").click();
+        cy.contains("jest test").click();
+        cy.contains("jest test").contains("blogs").click();
         cy.get("#like").click();
         cy.contains("2");
       });

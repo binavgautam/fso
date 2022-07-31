@@ -24,6 +24,7 @@ const blogSchema = new mongoose.Schema({
   comments: [
     {
       type: String,
+      default: [],
     },
   ],
 });
